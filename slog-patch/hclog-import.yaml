@@ -44,3 +44,19 @@ rules:
   message: use of hclog.Logger as a func arg
   languages: [go]
   severity: WARNING
+- id: hclog-getorcreatelogger
+  pattern: |
+    func getOrCreateLogger(...) {
+      ...
+    }
+  fix: ""
+  message: remove getOrCreateLogger method
+  languages: [go]
+  severity: WARNING
+- id: hclog-getorcreatelogger-use
+  pattern: |
+    $RECV.getOrCreateLogger()
+  fix: $RECV.Logger
+  message: remove getOrCreateLogger use
+  languages: [go]
+  severity: WARNING
