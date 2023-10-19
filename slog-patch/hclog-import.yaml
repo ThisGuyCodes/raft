@@ -1,0 +1,46 @@
+rules:
+- id: hclog-import-named
+  pattern: import hclog "github.com/hashicorp/go-hclog"
+  fix-regex:
+    regex: 'hclog "github.com/hashicorp/go-hclog"'
+    replacement: 'hclog "log/slog"'
+  message: use of hclog
+  languages: [go]
+  severity: WARNING
+- id: hclog-import-unnamed
+  pattern: import "github.com/hashicorp/go-hclog"
+  fix-regex:
+    regex: '"github.com/hashicorp/go-hclog"'
+    replacement: 'hclog "log/slog"'
+  message: use of hclog
+  languages: [go]
+  severity: WARNING
+- id: hclog-logger-arg
+  pattern: |
+    func $FUNC(..., $NAME hclog.Logger, ...) {...}
+  fix-regex:
+    regex: hclog.Logger
+    replacement: '*hclog.Logger'
+  message: use of hclog.Logger as a func arg
+  languages: [go]
+  severity: WARNING
+- id: hclog-logger-return
+  pattern: |
+    func $FUNC(...) hclog.Logger {...}
+  fix-regex:
+    regex: hclog.Logger
+    replacement: '*hclog.Logger'
+  message: use of hclog.Logger as a func arg
+  languages: [go]
+  severity: WARNING
+- id: hclog-logger-struct-member
+  pattern: |
+    type $STRUCT struct {
+      $NAME hclog.Logger
+    }
+  fix-regex:
+    regex: hclog.Logger
+    replacement: '*hclog.Logger'
+  message: use of hclog.Logger as a func arg
+  languages: [go]
+  severity: WARNING
