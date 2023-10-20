@@ -9,3 +9,7 @@ semgrep scan -c slog-patch --autofix "$@"
 PATH="$PATH:$(go env GOPATH)/bin"
 
 $(go env GOPATH)/bin/goimports -w -local 'github.com/hashicorp' .
+
+rm -rf testing.go *_test.go fuzzy
+
+go mod tidy
