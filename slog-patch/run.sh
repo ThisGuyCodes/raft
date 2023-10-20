@@ -16,4 +16,5 @@ rm -rf testing.go *_test.go fuzzy
 
 
 go mod edit -module github.com/thisguycodes/raft
+go mod edit -go 1.21
 go mod tidy
