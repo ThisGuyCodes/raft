@@ -63,7 +63,7 @@ rules:
 - id: hclog-fmt
   pattern: |
     hclog.Fmt($...ARGS)
-  fix: Fmt($ARGS)
+  fix: Fmt($...ARGS)
   message: replace hclog.Fmt with new Fmt
   languages: [go]
   severity: WARNING
