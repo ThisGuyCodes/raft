@@ -4,4 +4,8 @@ set -euo pipefail
 declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 cd "$SCRIPT_DIR/.."
 
-exec semgrep scan -c slog-patch --autofix "$@"
+semgrep scan -c slog-patch --autofix "$@"
+
+PATH="$PATH:$(go env GOPATH)/bin"
+
+$(go env GOPATH)/bin/goimports -w -local 'github.com/hashicorp' .
