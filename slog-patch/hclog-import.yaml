@@ -67,3 +67,58 @@ rules:
   message: replace hclog.Fmt with new Fmt
   languages: [go]
   severity: WARNING
+- id: hclog-NewFileSnapshotStore-remove
+  pattern: |
+    func NewFileSnapshotStore(...) {
+      ...
+    }
+  fix: ""
+  message: remove NewFileSnapshotStore, only support the one where you give a logger
+  languages: [go]
+  severity: WARNING
+- id: hclog-NewFileSnapshotStoreWithLogger-required
+  patterns:
+    - pattern: |
+        if logger == nil {
+          logger = ...
+        }
+    - pattern-inside: |
+        func NewFileSnapshotStoreWithLogger(...) {
+          ...
+        }
+  fix: ""
+  message: make the logger required in NewFileSnapshotStoreWithLogger
+  languages: [go]
+  severity: WARNING
+- id: hclog-NewNetworkTransport-remove
+  pattern: |
+    func NewNetworkTransport(...) {
+      ...
+    }
+  fix: ""
+  message: remove NewNetworkTransport, only support the one where you give a logger
+  languages: [go]
+  severity: WARNING
+- id: hclog-NewTCPTransport-remove
+  pattern: |
+    func NewTCPTransport(...) {
+      ...
+    }
+  fix: ""
+  message: remove NewTCPTransport, only support the one where you give a logger
+  languages: [go]
+  severity: WARNING
+- id: hclog-NewNetworkTransportWithConfig-required
+  patterns:
+    - pattern: |
+        if config.Logger == nil {
+          config.Logger = ...
+        }
+    - pattern-inside: |
+        func NewNetworkTransportWithConfig(...) {
+          ...
+        }
+  fix: ""
+  message: make the logger required in NewNetworkTransportWithConfig
+  languages: [go]
+  severity: WARNING
