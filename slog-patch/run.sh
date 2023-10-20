@@ -5,6 +5,8 @@ declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null 
 cd "$SCRIPT_DIR/.."
 
 semgrep scan -c slog-patch --autofix "$@"
+# for some reason I can't get them all in one go
+semgrep scan -c slog-patch --autofix "$@"
 
 PATH="$PATH:$(go env GOPATH)/bin"
 
